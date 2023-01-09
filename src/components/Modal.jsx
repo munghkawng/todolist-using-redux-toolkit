@@ -27,7 +27,7 @@ function DeleteModal() {
             Cancel
           </Button>
           <Button
-            colorScheme="purple"
+            colorScheme="red"
             onClick={() => {
               if (id) {
                 dispatch(deleteToDoList(id));
@@ -37,7 +37,7 @@ function DeleteModal() {
               dispatch(closeModal());
             }}
           >
-            Confirm
+            Delete
           </Button>
         </ModalFooter>
       </ModalContent>
