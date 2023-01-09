@@ -10,20 +10,38 @@ import {
   FormControl,
   Input,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "../features/modal/modalSlice";
-import {
-  handleInput,
-  updateTodoList,
-} from "../features/todolist/todolistSlice";
+import { closeModal, editToDoList } from "../features/modal/modalSlice";
+import { updateTodoList } from "../features/todolist/todolistSlice";
 function UpdateModal() {
   const dispatch = useDispatch();
-  const { updateTask, todoUpdate } = useSelector((store) => store.modal);
-  const { value } = useSelector((store) => store.todolist);
+  const { updateTask, todoUpdate, editValue } = useSelector(
+    (store) => store.modal
+  );
+
+  const toast = useToast();
 
   const handleChange = (e) => {
-    dispatch(handleInput(e.target.value));
+    dispatch(editToDoList(e.target.value));
+  };
+
+  const handleUpdate = () => {
+    if (editValue.trim() === "") {
+      toast({
+        position: "top",
+        title: "Input is Empty",
+
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    dispatch(updateTodoList({ id: todoUpdate.id, task: editValue }));
+
+    dispatch(closeModal());
   };
 
   return (
@@ -38,20 +56,13 @@ function UpdateModal() {
         <ModalCloseButton />
         <ModalBody pb={6}>
           <FormControl>
-            <Input value={value} onChange={handleChange} />
+            <Input value={editValue} onChange={handleChange} />
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
           <Button onClick={() => dispatch(closeModal())}>Cancel</Button>
-          <Button
-            colorScheme="purple"
-            ml={3}
-            onClick={() => {
-              dispatch(updateTodoList(todoUpdate.id));
-              dispatch(closeModal());
-            }}
-          >
+          <Button colorScheme="purple" ml={3} onClick={handleUpdate}>
             Update
           </Button>
         </ModalFooter>

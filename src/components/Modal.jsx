@@ -14,6 +14,7 @@ import { clearTask, deleteToDoList } from "../features/todolist/todolistSlice";
 import { closeModal } from "../features/modal/modalSlice";
 function DeleteModal() {
   const { isOpen, message, heading, id } = useSelector((store) => store.modal);
+
   const dispatch = useDispatch();
   return (
     <Modal isOpen={isOpen} isCentered onClose={() => dispatch(closeModal())}>

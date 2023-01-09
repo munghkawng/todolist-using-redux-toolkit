@@ -4,7 +4,7 @@ const initialState = {
   isOpen: false,
   heading: "",
   message: "",
-
+  editValue: "",
   updateTask: false,
   todoUpdate: null,
 };
@@ -23,14 +23,23 @@ const modalSlice = createSlice({
       state.isOpen = false;
       state.updateTask = false;
       state.message = "";
+      state.editValue = "";
     },
     openUpdateTaskModal: (state, action) => {
       state.updateTask = true;
       state.todoUpdate = action.payload;
     },
+    editToDoList: (state, action) => {
+      state.editValue = action.payload;
+    },
   },
 });
 
-export const { openModal, closeModal, openUpdateTaskModal } =
-  modalSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  openUpdateTaskModal,
+  handleInput,
+  editToDoList,
+} = modalSlice.actions;
 export default modalSlice.reducer;

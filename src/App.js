@@ -16,12 +16,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import DeleteModal from "./components/Modal";
-import { openModal, openUpdateTaskModal } from "./features/modal/modalSlice";
 import {
-  addToDoList,
-  handleInput,
+  openModal,
+  openUpdateTaskModal,
   editToDoList,
-} from "./features/todolist/todolistSlice";
+} from "./features/modal/modalSlice";
+import { addToDoList, handleInput } from "./features/todolist/todolistSlice";
 
 function App() {
   const { todolists, value } = useSelector((store) => store.todolist);
@@ -36,10 +36,10 @@ function App() {
     if (value.trim() === "") {
       toast({
         position: "top",
-        title: "Empty Input",
+        title: "Input is Empty",
 
         status: "error",
-        duration: 9000,
+        duration: 3000,
         isClosable: true,
       });
       return;

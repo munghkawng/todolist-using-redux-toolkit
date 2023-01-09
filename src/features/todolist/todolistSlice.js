@@ -23,21 +23,16 @@ const todolistSlice = createSlice({
       const taskId = action.payload;
       state.todolists = state.todolists.filter((task) => task.id !== taskId);
     },
-    editToDoList: (state, action) => {
-      console.log(action);
-      state.value = action.payload;
-    },
-    updateTodoList: (state, action) => {
-      const updateTaskId = action.payload;
+
+    updateTodoList: (state, { payload }) => {
+      const updateTaskId = payload.id;
 
       state.todolists = state.todolists.map((todo) => {
         if (todo.id === updateTaskId) {
-          return { ...todo, task: state.value };
+          return { ...todo, task: payload.task };
         }
         return todo;
       });
-
-      state.value = "";
     },
   },
 });
