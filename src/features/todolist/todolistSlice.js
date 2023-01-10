@@ -34,6 +34,15 @@ const todolistSlice = createSlice({
         return todo;
       });
     },
+    checkFinishedTask: (state, action) => {
+      const id = action.payload.id;
+      state.todolists = state.todolists.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      });
+    },
   },
 });
 
@@ -44,5 +53,6 @@ export const {
   updateTodoList,
   handleInput,
   editToDoList,
+  checkFinishedTask,
 } = todolistSlice.actions;
 export default todolistSlice.reducer;

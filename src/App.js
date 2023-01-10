@@ -21,7 +21,11 @@ import {
   openUpdateTaskModal,
   editToDoList,
 } from "./features/modal/modalSlice";
-import { addToDoList, handleInput } from "./features/todolist/todolistSlice";
+import {
+  addToDoList,
+  handleInput,
+  checkFinishedTask,
+} from "./features/todolist/todolistSlice";
 
 function App() {
   const { todolists, value } = useSelector((store) => store.todolist);
@@ -110,8 +114,14 @@ function App() {
             >
               <Flex my="2">
                 <HStack>
-                  <Checkbox size="md" colorScheme="green" />
-                  <Text>{task.task}</Text>
+                  <Checkbox
+                    size="md"
+                    colorScheme="green"
+                    onChange={() => dispatch(checkFinishedTask(task))}
+                  />
+                  <div className={`${task.completed ? "todo" : ""}`}>
+                    {task.task}
+                  </div>
                 </HStack>
                 <Spacer />
                 <HStack>
