@@ -77,7 +77,7 @@ function App() {
           </Text>
         </Center>
         {/* add goal section */}
-        <Box w={{ base: "70%", md: "25%" }} m="auto">
+        <Box w={{ base: "90%", md: "25%" }} m="auto">
           <form>
             <HStack mb="10">
               <Input
@@ -104,7 +104,7 @@ function App() {
             <Box
               key={task.id}
               m="auto"
-              w={{ base: "80%", md: "30%" }}
+              w={{ base: "90%", md: "30%" }}
               border="1px"
               borderColor="gray.300"
               py="2"
