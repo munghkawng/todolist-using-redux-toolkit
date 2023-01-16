@@ -1,5 +1,7 @@
 import "./App.css";
 import UpdateModal from "./components/UpdateModal";
+import theme from "./theme";
+
 import {
   ChakraProvider,
   Box,
@@ -13,6 +15,7 @@ import {
   Checkbox,
   useToast,
 } from "@chakra-ui/react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import DeleteModal from "./components/Modal";
@@ -26,6 +29,7 @@ import {
   handleInput,
   checkFinishedTask,
 } from "./features/todolist/todolistSlice";
+import ColorModeToggler from "./components/ColorModeToggler";
 
 function App() {
   const { todolists, value } = useSelector((store) => store.todolist);
@@ -62,7 +66,10 @@ function App() {
   };
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
+      <Flex justify="flex-end" mx="1" my="1">
+        <ColorModeToggler />
+      </Flex>
       {updateTask && <UpdateModal />}
       {isOpen && <DeleteModal />}
       <Box mt="20">
