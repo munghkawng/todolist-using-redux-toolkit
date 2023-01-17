@@ -14,7 +14,6 @@ import {
   Spacer,
   Checkbox,
   useToast,
-  Heading,
 } from "@chakra-ui/react";
 
 import { useSelector, useDispatch } from "react-redux";
