@@ -68,7 +68,7 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Flex justify="flex-end" mx="1" my="1">
+      <Flex justify="flex-end" mx="1" mt="1">
         <ColorModeToggler />
       </Flex>
 
