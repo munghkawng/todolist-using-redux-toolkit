@@ -1,7 +1,7 @@
 import "./App.css";
 import UpdateModal from "./components/UpdateModal";
 import theme from "./theme";
-
+import moment from "moment";
 import {
   ChakraProvider,
   Box,
@@ -14,6 +14,7 @@ import {
   Spacer,
   Checkbox,
   useToast,
+  Heading,
 } from "@chakra-ui/react";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -70,10 +71,11 @@ function App() {
       <Flex justify="flex-end" mx="1" my="1">
         <ColorModeToggler />
       </Flex>
+
       {updateTask && <UpdateModal />}
       {isOpen && <DeleteModal />}
-      <Box mt="20">
-        <Center mb="5">
+      <Box>
+        <Center>
           <Text
             bgGradient="linear(to-l, #7928CA, #FF0080)"
             bgClip="text"
@@ -83,6 +85,9 @@ function App() {
             ToDo List
           </Text>
         </Center>
+        <Flex justify="center" mb="5">
+          <Text color="purple">{moment().format("dddd MMMM Do YYYY")}</Text>
+        </Flex>
         {/* add goal section */}
         <Box w={{ base: "90%", md: "25%" }} m="auto">
           <form>
