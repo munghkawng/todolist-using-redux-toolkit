@@ -14,6 +14,7 @@ import {
   Spacer,
   Checkbox,
   useToast,
+  ScaleFade,
 } from "@chakra-ui/react";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -112,56 +113,58 @@ function App() {
         </Box>
         {todolists.map((task) => {
           return (
-            <Box
-              key={task.id}
-              m="auto"
-              w={{ base: "90%", md: "30%" }}
-              border="1px"
-              borderColor="gray.300"
-              py="2"
-              px="6"
-              borderRadius="6"
-              my="4"
-            >
-              <Flex my="2">
-                <HStack>
-                  <Checkbox
-                    size="md"
-                    colorScheme="green"
-                    onChange={() => dispatch(checkFinishedTask(task))}
-                  />
-                  <div className={`${task.completed ? "todo" : ""}`}>
-                    {task.task}
-                  </div>
-                </HStack>
-                <Spacer />
-                <HStack>
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      dispatch(editToDoList(task.task));
-                      dispatch(openUpdateTaskModal(task));
-                    }}
-                  >
-                    <EditIcon color="purple.500" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    onClick={() =>
-                      dispatch(
-                        openModal({
-                          heading: "Do You Really Want To Delete",
-                          task: task.task,
-                          id: task.id,
-                        })
-                      )
-                    }
-                  >
-                    <DeleteIcon color="red.500" />
-                  </Button>
-                </HStack>
-              </Flex>
-            </Box>
+            <ScaleFade initialScale={0.5} in={true}>
+              <Box
+                key={task.id}
+                m="auto"
+                w={{ base: "90%", md: "30%" }}
+                border="1px"
+                borderColor="gray.300"
+                py="2"
+                px="6"
+                borderRadius="6"
+                my="4"
+              >
+                <Flex my="2">
+                  <HStack>
+                    <Checkbox
+                      size="md"
+                      colorScheme="green"
+                      onChange={() => dispatch(checkFinishedTask(task))}
+                    />
+                    <div className={`${task.completed ? "todo" : ""}`}>
+                      {task.task}
+                    </div>
+                  </HStack>
+                  <Spacer />
+                  <HStack>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        dispatch(editToDoList(task.task));
+                        dispatch(openUpdateTaskModal(task));
+                      }}
+                    >
+                      <EditIcon color="purple.500" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() =>
+                        dispatch(
+                          openModal({
+                            heading: "Do You Really Want To Delete",
+                            task: task.task,
+                            id: task.id,
+                          })
+                        )
+                      }
+                    >
+                      <DeleteIcon color="red.500" />
+                    </Button>
+                  </HStack>
+                </Flex>
+              </Box>
+            </ScaleFade>
           );
         })}
         {todolists.length !== 0 && (
